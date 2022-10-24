@@ -31,9 +31,9 @@ public class StreamTransformer implements Transformable {
                 isOreAngry = ("true").equals(cats[i + 2].trim()) ? "Добрый" : "Злой и голодный";
                 strWriter = strWriter.format("%s Cat %s Весом %s кг.\n", isOreAngry, cats[i].trim(), cats[i + 1].trim());
                 
-               write.write(strWriter.getBytes());
+               write.write(strWriter.getBytes(StandardCharsets.UTF_8));
 
-             String strEncoding = new String(strWriter.getBytes());
+             String strEncoding = new String(strWriter.getBytes(StandardCharsets.UTF_8));
               System.out.println(strWriter + "\n" + strEncoding);
               i += 3;
             }
