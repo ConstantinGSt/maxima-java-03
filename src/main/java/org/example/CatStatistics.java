@@ -8,6 +8,7 @@ public class CatStatistics {
     public static ArrayList<Cat> sortByNameAscending(ArrayList<Cat> cats){
        // возвращает список котов, отсортировав по имени по возрастанию.
     }
+
     public static ArrayList<Cat> sortByWeightDescending(ArrayList<Cat> cats) {
         //возвращает список котов, отсортировав по убыванию веса.
     }
