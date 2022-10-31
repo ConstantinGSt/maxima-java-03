@@ -1,4 +1,3 @@
-/*
 package org.example;
 
 import java.util.ArrayList;
@@ -30,4 +29,3 @@ public class CatStatistics {
         //— возвращает список котов сгруппировав их по первой букве имени и отсортировав группировку по возрастанию.
     }
 }
-*/
