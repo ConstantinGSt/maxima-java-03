@@ -1,16 +1,17 @@
 /*
 package org.example;
 
-import java.io.*;
+import java.io.IOException;
+import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.List;
-import java.util.stream.Stream;
 
 import static java.nio.file.Files.isDirectory;
 
-public class FileAnalyzer {
+public class FileAnalyzer extends SimpleFileVisitor<Path>{
 	private int maxPathLength;
 	private int maxFilenameLength;
 
