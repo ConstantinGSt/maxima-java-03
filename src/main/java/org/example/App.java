@@ -2,19 +2,25 @@ package org.example;
 
 import java.io.*;
 import java.nio.file.Path;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class App {
     public static void main(String[] args) throws Exception {
 
         ArrayList<Cat> cats = new ArrayList<>();
-        Cat murzik = new Cat("murzik", 10);
-        Cat murka = new Cat("murka", 1);
-        Cat pufok = new Cat("pufok", 120);
+        Cat murzik = new Cat("Барсик", 10);
+        Cat murka = new Cat("Мурка", 1);
+        Cat pufok = new Cat("Аннушка", 5);
         cats.add(murzik);
         cats.add(murka);
         cats.add(pufok);
-        System.out.println(cats.sort((o1, o2) -> char);
+        System.out.println(cats);
+        CatStatistics.sortByNameAscending(cats);
+        System.out.println(cats);
+        CatStatistics.sortByWeightDescending(cats);
+        System.out.println(cats);
+        //System.out.println(cats.sort((o1, o2) -> char);
         /*System.out.println(CatFactory.createCat("Пушок", 120));
         System.out.println(CatFactory.createCat("BARSIK", 0)); */
 
