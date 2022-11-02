@@ -2,6 +2,9 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class CatStatistics {
     public static ArrayList<Cat> sortByNameAscending(ArrayList<Cat> cats) {
@@ -17,19 +20,18 @@ public class CatStatistics {
     }
 
     public static ArrayList<Cat> removeFirstAndLast (ArrayList<Cat> cats) {
-        cats.remove(cats.size()-1);
-        cats.remove(0);
-        return cats;
+        return cats.stream().skip(0).limit(cats.size()-1).collect(Collectors.toCollection(ArrayList<Cat>::new));
         //возвращает список котов кроме первого и последнего.
     }
 
     public static Cat findFirstNonAngryCat (ArrayList<Cat> cats) {
-        int i = 0;
-        for(; i < cats.size(); i++){
-            if(!cats.get(i).isAngry()) {
-                break;
-            }
-        } return cats.get(i);
+        return cats.stream().dropWhile(Cat::isAngry).findFirst().get();
+//        int i = 0;
+//        for(; i < cats.size(); i++){
+//            if(!cats.get(i).isAngry()) {
+//                break;
+//            }
+//        } return cats.get(i);
         //возвращает первого не-сердитого кота в списке.
     }
 
@@ -49,7 +51,9 @@ public class CatStatistics {
         }return weight;
     }
 
-//    public static Map<String, List<Cat>> groupCatsByFirstLetter (ArrayList<Cat> cats) {
-//        //— возвращает список котов сгруппировав их по первой букве имени и отсортировав группировку по возрастанию.
-//    }
+    public static Map<String, List<Cat>> groupCatsByFirstLetter (ArrayList<Cat> cats) {
+        return cats.stream().sorted(Comparator.comparing(Cat::getName)).collect(Collectors.groupingBy(firstChar -> firstChar.getName().substring(0,1)));
+
+        //— возвращает список котов сгруппировав их по первой букве имени и отсортировав группировку по возрастанию.
+    }
 }
