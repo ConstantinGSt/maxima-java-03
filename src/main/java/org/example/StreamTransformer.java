@@ -1,11 +1,9 @@
-/*
 package org.example;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 public class StreamTransformer implements Transformable {
@@ -51,4 +49,3 @@ public class StreamTransformer implements Transformable {
 
 
 
-*/
