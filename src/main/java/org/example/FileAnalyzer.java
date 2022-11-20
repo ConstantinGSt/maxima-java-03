@@ -1,57 +1,54 @@
-/*
 package org.example;
 
-import java.io.IOException;
-import java.nio.file.FileVisitResult;
+import java.io.FileWriter;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.SimpleFileVisitor;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.util.List;
+import java.nio.file.Paths;
 
-import static java.nio.file.Files.isDirectory;
+public class FileAnalyzer {
 
-public class FileAnalyzer extends SimpleFileVisitor<Path>{
-	private int maxPathLength;
-	private int maxFilenameLength;
+    private int maxFilenameLength;
+    private int maxPathLength;
 
-	public FileAnalyzer(int maxPathLength, int maxFilenameLength) {
-		this.maxPathLength = maxPathLength;
-		this.maxFilenameLength = maxFilenameLength;
-	}
+    public FileAnalyzer(int maxPathLength, int maxFilenameLength) {
+        this.maxPathLength = maxPathLength;
+        this.maxFilenameLength = maxFilenameLength;
+    }
 
-	public  void createReport(String filepath, String filename) {  //обход системы от filepath и запишет filename все результаты нарушевшие
+    public void createReport(String filepath, String filename) {
+        Path path = Paths.get(filepath);
+        try (DirectoryStream<Path> files = Files.newDirectoryStream(path);
+             FileWriter writer = new FileWriter(filename, true)) {
+            for (Path paths : files) {
+                if(paths.toString().length() > maxPathLength
+                        || paths.getFileName().toString().length() > maxFilenameLength) {
+                    System.out.println(paths);
+                    writer.write(paths.toString() + "\n");
+                }
+                if(Files.isDirectory(paths) ) {
+                    createReport(paths.toString(), filename);
+                }
+            } files.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-		Path startPath = Path.of(filepath);
-		if(isDirectory(startPath)) {
+    public int getMaxFilenameLength() {
+        return maxFilenameLength;
+    }
 
-			try(Stream<Path> walk = Files.walk(startPath, Integer.MAX_VALUE); FileOutputStream write = new FileOutputStream((File) walk))  {
-				write.write(walk.getBytes()
-				for(Path path : walk)
-					System.out.println(path);
-			} catch(IOException e) {
-				throw new RuntimeException(e);
-			}
-		}
-	}
-	
-	public int getMaxPathLength() {
-		return maxPathLength;
-	}
+    public void setMaxFilenameLength(int maxFilenameLength) {
+        this.maxFilenameLength = maxFilenameLength;
+    }
 
-	public void setMaxPathLength(int maxPathLength) {
-		this.maxPathLength = maxPathLength;
-	}
+    public int getMaxPathLength() {
+        return maxPathLength;
+    }
 
-	public int getMaxFilenameLength() {
-		return maxFilenameLength;
-	}
-
-	public void setMaxFilenameLength(int maxFilenameLength) {
-		this.maxFilenameLength = maxFilenameLength;
-	}
-
+    public void setMaxPathLength(int maxPathLength) {
+        this.maxPathLength = maxPathLength;
+    }
 
 }
-
-*/
