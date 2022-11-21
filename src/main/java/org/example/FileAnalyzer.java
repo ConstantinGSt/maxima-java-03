@@ -21,8 +21,10 @@ public class FileAnalyzer {
         try (DirectoryStream<Path> files = Files.newDirectoryStream(path);
              FileWriter writer = new FileWriter(filename, true)) {
             for (Path paths : files) {
-                if(paths.toString().length() > maxPathLength
-                        || paths.getFileName().toString().length() > maxFilenameLength) {
+                if((paths.toString().length() > maxPathLength
+                        && paths.getFileName().toString().length() <= maxFilenameLength) || (paths.toString().length() <= maxPathLength
+                        && paths.getFileName().toString().length() > maxFilenameLength) || (paths.toString().length() > maxPathLength
+                        && paths.getFileName().toString().length() > maxFilenameLength)) {
                     System.out.println(paths);
                     writer.write(paths.toString() + "\n");
                 }
