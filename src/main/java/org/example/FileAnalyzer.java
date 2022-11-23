@@ -24,7 +24,7 @@ public class FileAnalyzer {
                 if((paths.toString().length() > maxPathLength
                         && paths.getFileName().toString().length() <= maxFilenameLength) || (paths.toString().length() <= maxPathLength
                         && paths.getFileName().toString().length() > maxFilenameLength) || (paths.toString().length() > maxPathLength
-                        && paths.getFileName().toString().length() > maxFilenameLength)) {
+                        && paths.getFileName().toString().length() > maxFilenameLength)) { //max variation
                     System.out.println(paths);
                     writer.write(paths.toString() + "\n");
                 }
